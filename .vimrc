@@ -140,7 +140,7 @@ set hlsearch
 " set termguicolors
 
 if has("gui_running")
-    set guifont=Inconsolata\ 14
+    set guifont=Inconsolata\ 13
     set guioptions-=m
     set guioptions-=T
     command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
