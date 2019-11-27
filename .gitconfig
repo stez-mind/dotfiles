@@ -1,0 +1,33 @@
+[user]
+    email = stefano@elk.audio
+    name = stez-elk
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:'%h %ad | %s%d' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    bak = push --mirror
+
+[push]
+    default = simple
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+    required = true
+
+[pager]
+	branch = false
+    grep = false
+
+[color]
+    ui = auto
+
+[oh-my-zsh]
+	hide-status = 1
+	hide-dirty = 1
