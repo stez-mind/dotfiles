@@ -99,5 +99,7 @@ eval `dircolors $HOME/.dircolors`
 
 export PATH=$PATH:$HOME/bin:/usr/local/go/bin
 
+alias nvq="nvim-qt"
+
 eval $(thefuck --alias)
 

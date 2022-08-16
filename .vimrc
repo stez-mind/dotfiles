@@ -15,17 +15,23 @@ Plug 'tpope/vim-sensible'
 Plug 'djoshea/vim-autoread'
 Plug 'vim-scripts/EasyGrep'
 Plug 'vim-scripts/DoxygenToolkit.vim'
-Plug 'vim-scripts/minibufexpl.vim'
+Plug 'fholgado/minibufexpl.vim'
 Plug 'vim-scripts/The-NERD-tree'
 Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/UltiSnips'
 Plug 'honza/vim-snippets'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'mbbill/undotree'
 
 " Appereance
 Plug 'vim-airline/vim-airline'
 Plug 'KabbAmine/vullScreen.vim'
 Plug 'vim-scripts/ShowTrailingWhitespace'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'tssm/c64-vim-color-scheme'
 
 " C/C++
 Plug 'vim-scripts/a.vim'
@@ -37,6 +43,8 @@ Plug 'vivien/vim-linux-coding-style'
 Plug 'plasticboy/vim-markdown'
 Plug 'elzr/vim-json'
 Plug 'sbl/scvim', { 'for' : 'sclang' }
+Plug 'dermusikman/sonicpi.vim'
+Plug 'tidalcycles/vim-tidal'
 Plug 'gmoe/vim-faust', { 'for' : 'faust' }
 
 call plug#end()
@@ -128,7 +136,7 @@ nmap <a-j> <c-w>w<c-d><c-w>w
 nmap <a-k> <c-w>w<c-u><c-w>w
 
 " Activate / disable MiniBufExplorer with F3
-map <F3> :TMiniBufExplorer<CR>
+map <F3> :MBEToggle<CR>
 
 """"""""""""""""""""""""
 " Appearance
@@ -148,16 +156,18 @@ if has("gui_running")
     set columns=999
     set lines=999
     set background=dark
+    let g:gruvbox_italic=1
     colorscheme dracula
 else
     set t_Co=256
     set background=dark
     colorscheme dracula
+    let g:gruvbox_italic=1
     if exists("+lines")
         set lines=50
     endif
     if exists("+columns")
-        set columns=100
+        set columns=120
     endif
 endif
 
@@ -167,6 +177,11 @@ set foldmethod=indent
 set foldlevel=2
 set nofoldenable
 
+" Show extra whitespaces
+
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+
 
 """"""""""""""""""""""""""""""""""""
 " Plugin-specific configuration    "
@@ -174,9 +189,6 @@ set nofoldenable
 
 " Linux Coding Style paths
 let g:linuxsty_patterns = [ "/linux/", "/kernel/" ]
-
-" Clang Completion
-let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang-6.0.so'
 
 let g:UltiSnipsExpandTrigger="<shift-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -203,9 +215,12 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " NERDtree & TList window width
-let g:NERDTreeWinSize=20
-let g:Tlist_WinWidth=20
+let g:NERDTreeWinSize=16
+let g:Tlist_WinWidth=24
 
-" Dracula colorscheme
-let g:dracula_italic = 1
+" Sonic Pi
+let g:sonicpi_command = 'sonic-pi-tool.py'
+let g:sonicpi_send = 'eval-stdin'
+let g:sonicpi_stop = 'stop'
+let g:vim_redraw = 1
 
