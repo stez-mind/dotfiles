@@ -31,7 +31,9 @@ Plug 'vim-scripts/ShowTrailingWhitespace'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
+Plug 'ericbn/vim-solarized'
 Plug 'tssm/c64-vim-color-scheme'
+" Plug 'ryanoasis/vim-devicons'
 
 " C/C++
 Plug 'vim-scripts/a.vim'
@@ -148,7 +150,7 @@ set hlsearch
 " set termguicolors
 
 if has("gui_running")
-    set guifont=Inconsolata\ 13
+    set guifont=Hack\ 14
     set guioptions-=m
     set guioptions-=T
     command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
@@ -161,14 +163,8 @@ if has("gui_running")
 else
     set t_Co=256
     set background=dark
-    colorscheme dracula
+    colorscheme solarized
     let g:gruvbox_italic=1
-    if exists("+lines")
-        set lines=50
-    endif
-    if exists("+columns")
-        set columns=120
-    endif
 endif
 
 " Folding options

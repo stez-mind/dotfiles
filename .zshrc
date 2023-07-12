@@ -7,7 +7,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
@@ -74,7 +74,6 @@ plugins=(
     history-substring-search
     python
     sudo
-    systemd
     vi-mode
     web-search
 )
@@ -88,18 +87,35 @@ source $ZSH/oh-my-zsh.sh
 HISTSIZE=10000
 SAVEHIST=30000
 
-export VISUAL=vim
+# export VISUAL=vim
 export EDITOR="$VISUAL"
 export TERM=screen-256color
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-eval `dircolors $HOME/.dircolors`
+# eval `dircolors $HOME/.dircolors`
 
 export PATH=$PATH:$HOME/bin:/usr/local/go/bin
 
 alias nvq="nvim-qt"
 
 eval $(thefuck --alias)
+
+source ${HOME}/.ghcup/env
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/stex/Library/jupyterlab-desktop/jlab_server/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/stex/Library/jupyterlab-desktop/jlab_server/etc/profile.d/conda.sh" ]; then
+        . "/Users/stex/Library/jupyterlab-desktop/jlab_server/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/stex/Library/jupyterlab-desktop/jlab_server/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

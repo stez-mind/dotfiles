@@ -1,6 +1,10 @@
 [user]
-    email = stefano@elk.audio
+	email = stefano@elk.audio
 	name = Stefano Zambon
+
+[core]
+    editor = nvim
+	excludesfile = /Users/stex/.gitignore_global
 
 [alias]
     co = checkout
@@ -16,18 +20,25 @@
     default = simple
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
     required = true
 
 [pager]
-	branch = false
+    branch = false
     grep = false
 
 [color]
     ui = auto
 
 [oh-my-zsh]
-	hide-status = 1
-	hide-dirty = 1
+    hide-status = 1
+    hide-dirty = 1
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
