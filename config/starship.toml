@@ -1,0 +1,26 @@
+# Minimal starship config optimized for tmux fullscreen workflow
+# Git status is shown in tmux status bar via gitmux, so keep prompt lean
+
+format = """$directory$character"""
+right_format = """$cmd_duration"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[<](bold blue)"
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "bold yellow"
+
+[git_branch]
+disabled = true
+
+[git_status]
+disabled = true
