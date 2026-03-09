@@ -1,0 +1,57 @@
+[user]
+	name  = __GIT_NAME__
+	email = __GIT_EMAIL__
+
+[core]
+	editor       = nvim
+	excludesfile = ~/.gitignore_global
+
+[init]
+	defaultBranch = master
+
+[push]
+	default         = simple
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
+
+[rebase]
+	autosquash = true
+	autostash  = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = zebra
+
+[branch]
+	sort = -committerdate
+
+[alias]
+	co   = checkout
+	ci   = commit
+	st   = status
+	br   = branch
+	hist = log --pretty=format:'%h %ad | %s%d' --graph --date=short
+	lg   = log --oneline --graph --decorate --all
+	type = cat-file -t
+	dump = cat-file -p
+	bak  = push --mirror
+
+[filter "lfs"]
+	clean    = git-lfs clean -- %f
+	smudge   = git-lfs smudge -- %f
+	process  = git-lfs filter-process
+	required = true
+
+[pager]
+	branch = false
+	grep   = false
+
+[color]
+	ui = auto

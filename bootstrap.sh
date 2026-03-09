@@ -202,6 +202,25 @@ if [[ "$SHELL" != "$ZSH_PATH" ]]; then
   chsh -s "$ZSH_PATH"
 fi
 
+# ── Install .gitconfig from template ────────────────────────────
+info "Setting up ~/.gitconfig..."
+printf '\033[1;34m[info]\033[0m  Enter your git name  (e.g. Jane Doe): '
+read -r GIT_NAME
+printf '\033[1;34m[info]\033[0m  Enter your git email (e.g. jane@example.com): '
+read -r GIT_EMAIL
+if [[ -n "$GIT_NAME" && -n "$GIT_EMAIL" ]]; then
+  if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then
+    warn "Backing up existing ~/.gitconfig -> ~/.gitconfig.bak"
+    mv "$HOME/.gitconfig" "$HOME/.gitconfig.bak"
+  fi
+  sed -e "s/__GIT_NAME__/$GIT_NAME/" \
+      -e "s/__GIT_EMAIL__/$GIT_EMAIL/" \
+      "$DOTFILES_DIR/git/gitconfig.template" > "$HOME/.gitconfig"
+  ok "~/.gitconfig written"
+else
+  warn "Name or email was empty — skipping .gitconfig setup"
+fi
+
 # ── Done ──────────────────────────────────────────────────────────
 echo ""
 ok "Bootstrap complete!"
@@ -209,3 +228,4 @@ info "Next steps:"
 info "  1. Restart your shell:  exec zsh"
 info "  2. In tmux, press prefix + I to install tmux plugins"
 info "  3. Open nvim — plugins will auto-install on first launch"
+info "  4. To re-run only the gitconfig step: run bootstrap.sh again (it will ask name/email)"
