@@ -278,5 +278,25 @@ require("lazy").setup({
 -- Colorscheme (after plugins are loaded)
 vim.cmd.colorscheme("solarized")
 
+--------------------------------------------------------------------------------
+-- Reflow mode: toggle soft-wrap display at 120 columns
+-- Usage: :Reflow  (toggles on/off)
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_user_command("Reflow", function()
+  -- Hard-wrap entire buffer at 120 columns using vim's built-in formatter.
+  -- Toggling off only resets textwidth; use 'u' to undo the reformat itself.
+  if vim.bo.textwidth == 120 then
+    vim.bo.textwidth = 0
+    vim.wo.colorcolumn = ""
+    vim.notify("Reflow OFF (textwidth reset; use 'u' to undo reformatting)")
+  else
+    vim.bo.textwidth = 120
+    vim.wo.colorcolumn = "120"
+    vim.cmd("normal! gggqG")
+    vim.notify("Reflow ON (hard-wrapped at 120)")
+  end
+end, { desc = "Toggle hard-wrap reflow at 120 columns (reformats buffer)" })
+
 -- Linux kernel coding style paths
 vim.g.linuxsty_patterns = { "/linux/", "/kernel/" }
