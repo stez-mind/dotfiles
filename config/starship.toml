@@ -5,8 +5,8 @@ format = """$directory$character"""
 right_format = """$cmd_duration"""
 
 [directory]
-truncation_length = 3
-truncate_to_repo = true
+truncation_length = 0
+truncate_to_repo = false
 style = "bold cyan"
 
 [character]
