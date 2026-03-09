@@ -84,6 +84,20 @@ _source_plugin zsh-syntax-highlighting zsh-syntax-highlighting.zsh
 unset _plugin_dir _user_plugin_dir _zvm_path _dir
 unfunction _source_plugin
 
+# ── Directory navigation ───────────────────────────────────────────
+# Typing ... expands to ../.., .... to ../../.. etc.
+# Combined with AUTO_CD above, just press Enter to go up N levels.
+rationalise-dot() {
+  if [[ $LBUFFER = *.. ]]; then
+    LBUFFER+=/..
+  else
+    LBUFFER+=.
+  fi
+}
+zle -N rationalise-dot
+bindkey '.' rationalise-dot
+bindkey -M isearch '.' self-insert  # keep literal . during incremental search
+
 # ── Aliases ───────────────────────────────────────────────────────
 alias ls='eza --icons'
 alias ll='eza -l --icons --git --color-scale'
