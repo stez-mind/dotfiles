@@ -65,15 +65,17 @@ vim.api.nvim_create_autocmd("WinNew", {
   end,
 })
 
--- Highlight trailing whitespace (persists across colorscheme changes)
+-- Highlight trailing whitespace (works with Tree-sitter)
 local function set_whitespace_hl()
   vim.api.nvim_set_hl(0, "ExtraWhitespace", { ctermbg = "darkgreen", bg = "darkgreen" })
 end
 set_whitespace_hl()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_whitespace_hl })
-vim.api.nvim_create_autocmd("Syntax", {
+vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
   pattern = "*",
-  command = [[syn match ExtraWhitespace /\s\+$\| \+\ze\t/]],
+  callback = function()
+    vim.fn.matchadd("ExtraWhitespace", [[\s\+$]])
+  end,
 })
 
 --------------------------------------------------------------------------------
