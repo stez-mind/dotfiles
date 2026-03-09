@@ -10,10 +10,10 @@ setopt HIST_VERIFY            # show expanded history before executing
 # ── Completion ────────────────────────────────────────────────────
 autoload -Uz compinit
 # Only regenerate compinit dump once a day
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
+if [[ -f ~/.zcompdump && ! -n ~/.zcompdump(#qN.mh+24) ]]; then
   compinit -C
+else
+  compinit
 fi
 
 zstyle ':completion:*' menu select                    # arrow-key menu
@@ -24,6 +24,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # colored completions
 setopt AUTO_CD                # cd by typing directory name
 setopt INTERACTIVE_COMMENTS   # allow # comments in interactive shell
 setopt NO_BEEP
+setopt COMPLETE_ALIASES       # complete aliases as their expansion (fixes eza aliases)
 
 # ── Platform detection ────────────────────────────────────────────
 _user_plugin_dir="$HOME/.local/share/zsh/plugins"
