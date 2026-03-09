@@ -218,10 +218,27 @@ require("lazy").setup({
     opts = {
       keymap = {
         preset = "default",
-        ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = { "accept", "fallback" },
       },
-      sources = { default = { "lsp", "path", "buffer" } },
+      completion = {
+        list = { max_items = 5 },
+      },
+      fuzzy = {
+        frecency = { enabled = false },
+        proximity = { enabled = false },
+        sorts = { "score", "sort_text" },
+      },
+      sources = {
+        default = { "lsp", "path", "buffer" },
+        min_keyword_length = function()
+          local ft = vim.bo.filetype
+          local plain_types = { text = true, markdown = true, gitcommit = true, help = true }
+          if plain_types[ft] or ft == "" then
+            return 4
+          end
+          return 3
+        end,
+      },
     },
   },
 
